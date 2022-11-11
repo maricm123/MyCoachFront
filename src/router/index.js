@@ -6,14 +6,16 @@ import Home from '../views/Home.vue'
 import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
+import Programs from '../views/dashboard/Programs.vue'
+
 import MyAccount from '../views/dashboard/MyAccount.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: Home
+  // },
   {
     path: '/sign-up',
     name: 'SignUp',
@@ -39,6 +41,14 @@ const routes = [
     meta: {
       requireLogin: true
     }
+  },
+    {
+      path: '/',
+      name: 'Programs',
+      component: Programs,
+      meta: {
+        requireLogin: false
+      }
   },
   {
     path: '/dashboard/my-account',
