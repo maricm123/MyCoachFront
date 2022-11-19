@@ -1,21 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '../store'
 
-import Home from '../views/Home.vue'
-
 import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
-import Dashboard from '../views/dashboard/Dashboard.vue'
-import Programs from '../views/dashboard/Programs.vue'
-
-import MyAccount from '../views/dashboard/MyAccount.vue'
+import Dashboard from '../views/coach/Dashboard.vue'
+import Programs from '../views/Programs.vue'
+import Program from '../views/coach/Program.vue'
+import Welcome from '../views/Welcome.vue'
+import AddProgram from '../views/coach/AddProgram.vue'
+import MyAccount from '../views/coach/MyAccount.vue'
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home
-  // },
   {
     path: '/sign-up',
     name: 'SignUp',
@@ -27,15 +22,7 @@ const routes = [
     component: LogIn
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
-    path: '/dashboard',
+    path: '/coach/dashboard',
     name: 'Dashboard',
     component: Dashboard,
     meta: {
@@ -44,16 +31,40 @@ const routes = [
   },
     {
       path: '/',
-      name: 'Programs',
-      component: Programs,
+      name: 'Welcome',
+      component: Welcome,
       meta: {
         requireLogin: false
       }
   },
   {
-    path: '/dashboard/my-account',
+    path: '/programs',
+    name: 'Programs',
+    component: Programs,
+    meta: {
+      requireLogin: false
+    }
+},
+  {
+    path: '/coach/my-account',
     name: 'MyAccount',
     component: MyAccount,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/coach/programs/add',
+    name: 'AddProgram',
+    component: AddProgram,
+    meta: {
+      requireLogin: true
+    }
+  },
+  {
+    path: '/coach/programs/:id',
+    name: 'Program',
+    component: Program,
     meta: {
       requireLogin: true
     }

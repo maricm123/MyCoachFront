@@ -6,6 +6,12 @@
             
                 <form @submit.prevent="submitForm">
                     <div class="field">
+                        <label>Username</label>
+                        <div class="control">
+                            <input type="text" name="username" class="input" v-model="username">
+                        </div>
+                    </div>
+                    <div class="field">
                         <label>Email</label>
                         <div class="control">
                             <input type="email" name="email" class="input" v-model="email">
@@ -15,7 +21,7 @@
                     <div class="field">
                         <label>Password</label>
                         <div class="control">
-                            <input type="password" name="password1" class="input" v-model="password1">
+                            <input type="password" name="password" class="input" v-model="password">
                         </div>
                     </div>
 
@@ -53,8 +59,9 @@ import {toast} from 'bulma-toast'
         name: 'SignUp',
         data() {
             return {
+                username: '',
                 email: '',
-                password1: '',
+                password: '',
                 password2: '',
                 errors: []
             }
@@ -65,26 +72,32 @@ import {toast} from 'bulma-toast'
                 
                 this.errors = []
 
+                if (this.username === '') {
+                    this.errors.push('The username is missing')
+                }
+
                 if (this.email === '') {
                     this.errors.push('The email is missing')
                 }
 
-                if (this.password1 === '') {
+                if (this.password === '') {
                     this.errors.push('The password is too short')
                 }
 
-                if (this.password1 !== this.password2) {
+                if (this.password !== this.password2) {
                     this.errors.push('The password are not matching')
                 }
 
                 if (!this.errors.length) {
                     const formData = {
+                        username: this.username,
                         email: this.email,
-                        password: this.password1
+                        password: this.password,
+                        password2: this.password2
                     }
 
                     await axios
-                        .post('/api/v1/users/', formData)
+                        .post('/backend/api_coafro/coachsignup/', formData)
                         .then(response => {
                             toast({
                                 message: 'Account was created, please log in',
