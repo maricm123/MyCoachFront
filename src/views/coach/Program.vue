@@ -29,12 +29,16 @@
 
 <script>
 import axios from 'axios'
+import {mapGetters} from 'axios'
 export default {
     name: "Program",
     data() {
         return {
             program: {}
         }
+    },
+    computed: {
+        
     },
     methods: {
         async getProgram() {

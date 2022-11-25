@@ -60,42 +60,32 @@
                 }
 
                 await axios
-                    .post('/api/v1/token/login/', formData)
+                    .post('/backend/api_coafro/coachlogin/', formData)
                     .then(response => {
-                        const token = response.data.auth_token
-
+                        console.log(response)
+                        const token = response.data.tokens.access
+                        const is_coach = response.data.is_coach.is_coach
+                        console.log(token)
                         this.$store.commit('setToken', token)
+                        this.$store.commit('setCoach', is_coach)
 
                         axios.defaults.headers.common['Authorization'] = 'Token ' + token
 
                         localStorage.setItem('token', token)
+                        localStorage.setItem('is_coach', is_coach)
+                        this.$router.push('/coach/my-account')
 
                     })
                     .catch(error => {
                         if (error.response) {
-                            for (const property in error.response.data) {
-                                this.errors.push(`${property}: ${error.response.data[property]}`)
+                            for (const message in response.data) {
+                                this.errors.push(`${message}: ${response.data[message]}`)
                             }
                         } else if (error.message) {
                             this.errors.push('Something went wrong. Please try again!')
                         }
                     })
 
-                await axios
-                    .get('/api/v1/users/me')
-                    .then(response => {
-                        this.$store.commit('setUser', {'id': response.data.id, 'username': response.data.username})
-
-                        localStorage.setItem('username', response.data.username)
-                        localStorage.setItem('userId', response.data.id)
-
-                        this.$router.push('/coach/my-account')
-
-                    })
-                    .catch(error => {
-                        console.log(error)
-
-                    })
                     this.$store.commit("setIsLoading", false)
             }
         }

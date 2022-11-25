@@ -1,28 +1,31 @@
 import { createStore } from 'vuex'
 
 export default createStore({
+  getters: {
+    // isAuthenticated (state) {
+    //   return state.user
+    // },
+    // clientAuth: state => state.user.is_client === "True",
+    coachAuth: state => state.is_coach
+
+  },
   state: {
     isLoading: false,
     isAuthenticated: false,
     token: '',
-    user: {
-      id: 0,
-      username: ''
-    }
+    // refresh: '',
+    is_coach: false
+
   },
   mutations: {
     initializeStore(state) {
       if (localStorage.getItem('token')) {
         state.token = localStorage.getItem('token')
+        state.is_coach = localStorage.getItem('is_coach')
         state.isAuthenticated = true
-        state.user.username = localStorage.getItem('username')
-        state.user.id = localStorage.getItem('userid')
-
       } else {
         state.token = ''
         state.isAuthenticated = false
-        state.user.username = ''
-        state.user.id = 0
       }
     },
     setIsLoading(state, status) {
@@ -34,10 +37,12 @@ export default createStore({
     },
     removeToken(state) {
       state.token = ''
+      state.is_coach = ''
       state.isAuthenticated = false
     },
-    setUser(state, user) {
-      state.user = user
+    setCoach(state, is_coach) {
+      console.log(state, is_coach)
+      state.is_coach = is_coach
     }
   },
   actions: {

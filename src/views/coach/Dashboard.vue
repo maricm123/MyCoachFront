@@ -29,6 +29,7 @@
             </div>
 
             <div class="content">
+              <!-- <h1 v-if="coachAuth === 'True'">COach je</h1> -->
               <h1>{{program.name}}</h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Phasellus nec iaculis mauris.
               <a>@bulmaio</a>.
@@ -59,12 +60,18 @@ export default {
       coachprograms: []
     };
   },
+  computed: {
+    coachAuth() {
+        const isAuth = this.$store.getters.coachAuth
+        return isAuth
+    },   
+  },
   methods: {
     async getPrograms() {
       this.$store.commit("setIsLoading", true);
 
       axios
-        .get("/backend/api_coafro/coach_programs")
+        .get("/backend/api_coafro/coach_programs" , { headers: { Authorization: `Bearer ${this.$store.state.token}` }})
         .then(response => {
           this.coachprograms = response.data;
         })
