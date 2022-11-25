@@ -9,13 +9,11 @@
         <div class="navbar-menu">
             <div class="navbar-end">
                 <!-- <router-link to="/" class="navbar-item">Programs </router-link> -->
-
-
                 <div class="navbar-item">
                     <div class="buttons">
                         <template v-if="!$store.state.isAuthenticated">
-                            <router-link to="/sign-up" class="button is-success"><strong>Sign up</strong></router-link>
-                            <router-link to="/log-in" class="button is-light">Log in</router-link>
+                            <router-link to="/coachsignup" class="button is-success"><strong>Sign up</strong></router-link>
+                            <router-link to="/coachlogin" class="button is-light">Log in</router-link>
                         </template>
                         
                         <template v-else>

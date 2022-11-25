@@ -13,7 +13,7 @@
 </section>  
 </router-link>
 <br>
-<router-link to="/sign-up"> 
+<router-link to="/coachsignup"> 
 <section class="hero is-medium is-info">
   <div class="hero-body">
     <p class="title">

@@ -18,16 +18,7 @@
     export default {
         name: 'MyAccount',
         methods: {
-            async logout() {
-                await axios
-                    .post('/api/v1/token/logout/')
-                    .then(response => {
-                        console.log('Logged out')
-                    })
-                    .catch(error => {
-                        console.log(JSON.stringify(error))
-                    })
-                
+            async logout() {    
                 axios.defaults.headers.common['Authorization'] = ''
                 localStorage.removeItem('token')
                 localStorage.removeItem('is_coach')

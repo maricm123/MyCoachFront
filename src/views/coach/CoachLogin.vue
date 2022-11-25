@@ -49,8 +49,7 @@
         methods: {
             async submitForm() {
                 this.$store.commit("setIsLoading", true)
-
-
+                
                 axios.defaults.headers.common['Authorization'] = ''
                 localStorage.removeItem('token')
 
@@ -62,10 +61,8 @@
                 await axios
                     .post('/backend/api_coafro/coachlogin/', formData)
                     .then(response => {
-                        console.log(response)
                         const token = response.data.tokens.access
                         const is_coach = response.data.is_coach.is_coach
-                        console.log(token)
                         this.$store.commit('setToken', token)
                         this.$store.commit('setCoach', is_coach)
 

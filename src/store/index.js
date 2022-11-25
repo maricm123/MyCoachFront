@@ -41,7 +41,6 @@ export default createStore({
       state.isAuthenticated = false
     },
     setCoach(state, is_coach) {
-      console.log(state, is_coach)
       state.is_coach = is_coach
     }
   },

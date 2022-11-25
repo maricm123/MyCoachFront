@@ -12,12 +12,12 @@ import MyAccount from '../views/coach/MyAccount.vue'
 
 const routes = [
   {
-    path: '/sign-up',
+    path: '/coachsignup',
     name: 'SignUp',
     component: CoachSignup
   },
   {
-    path: '/log-in',
+    path: '/coachlogin',
     name: 'LogIn',
     component: CoachLogin
   },
@@ -26,16 +26,14 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     meta: {
-      requireLogin: true
+      requireLogin: true,
+      requireCoachRole: true
     }
   },
     {
       path: '/',
       name: 'Welcome',
       component: Welcome,
-      meta: {
-        requireLogin: false
-      }
   },
   {
     path: '/programs',
@@ -50,7 +48,8 @@ const routes = [
     name: 'MyAccount',
     component: MyAccount,
     meta: {
-      requireLogin: true
+      requireLogin: true,
+      requireCoachRole: true
     }
   },
   {
@@ -76,10 +75,22 @@ const router = createRouter({
   routes
 })
 
+
 // if some of these routes above have argument require login true
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requireLogin) && !store.state.isAuthenticated) {
+//     next('/log-in')
+//   } else {
+//     next()
+//   }
+// })
+
+
+
+// for coach routes
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requireLogin) && !store.state.isAuthenticated) {
-    next('/log-in')
+  if (to.matched.some(record => record.meta.requireCoachRole) && !store.getters.coachAuth) {
+    next('/coachlogin')
   } else {
     next()
   }
