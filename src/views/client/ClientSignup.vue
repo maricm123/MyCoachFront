@@ -97,7 +97,7 @@ import {toast} from 'bulma-toast'
                     }
 
                     await axios
-                        .post('/backend/api_coafro/coachsignup/', formData)
+                        .post('/backend/api_coafro/clientsignup/', formData)
                         .then(response => {
                             toast({
                                 message: 'Account was created, please log in',
@@ -108,7 +108,7 @@ import {toast} from 'bulma-toast'
                                 position: 'bottom-right',
                             })
 
-                            this.$router.push('/coachsignup')
+                            this.$router.push('/clientlogin')
                         })
                         .catch(error => {
                             if (error.response) {
@@ -122,6 +122,6 @@ import {toast} from 'bulma-toast'
                         this.$store.commit("setIsLoading", false)
                 }
             }
-        } 
+        }
     }
 </script>

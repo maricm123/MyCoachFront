@@ -38,7 +38,7 @@
     import axios from 'axios'
 
     export default {
-        name: 'CoachLogin',
+        name: 'ClientLogin',
         data() {
             return {
                 email: '',
@@ -59,18 +59,18 @@
                 }
 
                 await axios
-                    .post('/backend/api_coafro/coachlogin/', formData)
+                    .post('/backend/api_coafro/clientlogin/', formData)
                     .then(response => {
                         const token = response.data.tokens.access
-                        const is_coach = response.data.is_coach.is_coach
+                        const is_client = response.data.is_client.is_client
                         this.$store.commit('setToken', token)
-                        this.$store.commit('setCoach', is_coach)
+                        this.$store.commit('setClient', is_client)
 
                         axios.defaults.headers.common['Authorization'] = 'Token ' + token
 
                         localStorage.setItem('token', token)
-                        localStorage.setItem('is_coach', is_coach)
-                        this.$router.push('/coach/my-account')
+                        localStorage.setItem('is_client', is_client)
+                        this.$router.push('/programs')
 
                     })
                     .catch(error => {

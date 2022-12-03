@@ -1,5 +1,13 @@
 <template>
   <div class="container">
+    <button class="button is-dark">
+      <router-link class="has-text-white" :to="{name: 'ClientLogin'}">Login to see your programs</router-link>
+    </button>
+    <br>
+    <br>
+    <button class="button is-dark">
+      <router-link class="has-text-white" :to="{name: 'ClientSignup'}">SignUp to get your program</router-link>
+    </button>
     <h1 class="title">Programs</h1>
     <div v-if="programs" class="columns is-multiline">
       <div v-for="program in programs" v-bind:key="program.id" class="column is-4">
@@ -32,12 +40,14 @@
                 <router-link :to="{ name: 'Program', params: {id: program.id}}">See details</router-link>
               </button>
             </div>
+            
           </div>
         </div>
       </div>
     </div>
     <div v-else>There is no programs yet</div>
   </div>
+  
 </template>
 
 <script>
@@ -55,7 +65,7 @@ export default {
       this.$store.commit("setIsLoading", true);
 
       axios
-        .get("/backend/api_coafro/programs")
+        .get("/backend/api_coafro/programs" )
         .then(response => {
           this.programs = response.data;
         })
